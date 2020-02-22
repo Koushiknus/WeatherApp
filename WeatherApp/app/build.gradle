@@ -4,6 +4,9 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -23,6 +26,15 @@ android {
     }
 }
 
+ext {
+    retrofitVersion = '2.4.0'
+    supportVersion = '28.0.0'
+    lifecyleVersion = '1.1.1'
+    loggingInterceptor = '3.9.1'
+    navigationVersion = '2.1.0'
+
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -32,4 +44,89 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+
+    // RxAndroid
+    def rxandroid_version = '2.1.1'
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
+
+    // RxJava
+    def rxjava_version = '2.1.1'
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
+
+    // Rx-Retrofit Call Adapter
+    def rxcalladapter_version = '2.5.0'
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rxcalladapter_version"
+    // Retrofit call adapter
+
+    // Reactive Streams (convert Observable to LiveData)
+    def reactivestreams_version = "1.1.1"
+    implementation 'androidx.lifecycle:lifecycle-reactivestreams:2.0.0'
+
+    implementation 'androidx.fragment:fragment-ktx:1.1.0-beta01'
+
+    // LiveData & ViewModel
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+
+
+    // ViewModel and LiveData life cycle
+    testImplementation 'androidx.arch.core:core-testing:2.0.0'
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation 'com.itkacher.okhttpprofiler:okhttpprofiler:1.0.5'
+    implementation "com.squareup.okhttp3:logging-interceptor:$loggingInterceptor"
+
+    def dagger_version = "2.22"
+
+    // Glide
+    def glideVersion = "4.9.0"
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
+
+//    def dagger_version = "2.16" // version used by google samples
+
+    // Dagger2 core
+    implementation "com.google.dagger:dagger:$dagger_version"
+    annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
+
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+
+    // Dagger Android
+    implementation "com.google.dagger:dagger-android:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$dagger_version"
+
+
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // -------- INSTRUMENTATION TESTS (use JUnit4)
+    androidTestImplementation 'junit:junit:4.12'
+
+    // AndroidX test
+    def androidx_test_version = "1.1.0"
+    androidTestImplementation "androidx.test:core:$androidx_test_version"
+    androidTestImplementation "androidx.test:runner:$androidx_test_version"
+
+    // Architecture components testing
+    def androidx_arch_test_version = "2.0.1"
+    androidTestImplementation "androidx.arch.core:core-testing:$androidx_arch_test_version"
+
+
+    // -------- LOCAL UNIT TESTS (use JUnit5)
+    // JUnit Jupiter
+    def junit_jupiter_version = "5.3.2"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junit_jupiter_version"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:$junit_jupiter_version"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junit_jupiter_version"
+
+
+    // -------- MOCKITO
+    def mockito_version = "2.19.0"
+    testImplementation "org.mockito:mockito-core:$mockito_version"
 }
