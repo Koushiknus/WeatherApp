@@ -1,7 +1,7 @@
 package com.example.weatherapp.di
 
 import com.example.weatherapp.base.Constants
-import com.example.weatherapp.network.Apimethods
+import com.example.weatherapp.network.ApiMethods
 import com.itkacher.okhttpprofiler.OkHttpProfilerInterceptor
 import dagger.Module
 import dagger.Provides
@@ -36,14 +36,13 @@ object AppModule {
     @Reusable
     @Provides
     @JvmStatic
-    internal fun provideRetrofitInstance( okHttpClient : OkHttpClient): Apimethods {
+    internal fun provideRetrofitInstance( okHttpClient : OkHttpClient): ApiMethods {
         return Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
-            .create(Apimethods::class.java)
+            .create(ApiMethods::class.java)
     }
 
 }
