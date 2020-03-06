@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.weatherapp.base.BaseViewModel
 import com.example.weatherapp.model.SearchResponse
+import com.example.weatherapp.model.WeatherDetailsResponse
 import com.example.weatherapp.network.ApiMethods
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,10 +18,17 @@ class WeatherViewModel : BaseViewModel() {
 
     fun testSearchResults(){
         viewModelScope.launch {
-           val result = mWeatherRepository?.testCouRoutine() as SearchResponse
+           val result = mWeatherRepository?.getSearchResult() as SearchResponse
            Log.v("ResultReceived",result.toString())
         }
 
+    }
+
+    fun testGetWeatherDetails(){
+        viewModelScope.launch {
+            val result = mWeatherRepository?.getWeatherDetails() as WeatherDetailsResponse
+            Log.v("WeatherResponse",result.toString())
+        }
     }
 
 }

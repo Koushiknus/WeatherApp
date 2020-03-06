@@ -14,5 +14,6 @@ class WeatherActivity : AppCompatActivity() {
         setContentView(R.layout.activity_weather)
         mWeatherViewModel = ViewModelProviders.of(this,ViewModelFactory(this)).get(WeatherViewModel::class.java)
         mWeatherViewModel.testSearchResults()
+        mWeatherViewModel.testGetWeatherDetails()
     }
 }
