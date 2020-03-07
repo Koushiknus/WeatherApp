@@ -19,6 +19,11 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug{
+            debuggable true
+            minifyEnabled false
+            buildConfigField('String','FORMAT_KEY','"&format=json&key=e35d1e43b44e4d698da30324202302"')
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

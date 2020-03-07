@@ -19,7 +19,7 @@ class WeatherRepository : BaseRepository() {
     suspend fun getSearchResult() : SearchResponse?{
         return suspendCoroutine { continuation ->
               mApiMethods?.let {
-                  mApiMethods?.getSearchResults()?.enqueue(object : Callback<SearchResponse>{
+                  mApiMethods?.getSearchResults("London","3")?.enqueue(object : Callback<SearchResponse>{
                       override fun onFailure(call: retrofit2.Call<SearchResponse>, t: Throwable) {
                       }
 
@@ -39,7 +39,7 @@ class WeatherRepository : BaseRepository() {
         return suspendCoroutine { continuation ->
 
             mApiMethods?.let {
-                mApiMethods?.getWeatherDetails()?.enqueue(object : Callback<WeatherDetailsResponse>{
+                mApiMethods?.getWeatherDetails("48.85,2.35","2","3")?.enqueue(object : Callback<WeatherDetailsResponse>{
                     override fun onFailure(
                         call: retrofit2.Call<WeatherDetailsResponse>,
                         t: Throwable
