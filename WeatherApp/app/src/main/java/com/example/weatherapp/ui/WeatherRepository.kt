@@ -35,11 +35,11 @@ class WeatherRepository : BaseRepository() {
         }
     }
 
-    suspend fun getWeatherDetails() : WeatherDetailsResponse?{
+    suspend fun getWeatherDetails(latLong : String,numberOfDays : String,tp : String) : WeatherDetailsResponse?{
         return suspendCoroutine { continuation ->
 
             mApiMethods?.let {
-                mApiMethods?.getWeatherDetails("48.85,2.35","2","3")?.enqueue(object : Callback<WeatherDetailsResponse>{
+                mApiMethods?.getWeatherDetails(latLong,numberOfDays,tp)?.enqueue(object : Callback<WeatherDetailsResponse>{
                     override fun onFailure(
                         call: retrofit2.Call<WeatherDetailsResponse>,
                         t: Throwable

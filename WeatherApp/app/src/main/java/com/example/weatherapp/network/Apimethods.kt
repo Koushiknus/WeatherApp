@@ -9,7 +9,7 @@ import retrofit2.http.Query
 
 interface ApiMethods {
 
-    @GET("search.ashx?query=London&num_of_results=3"+BuildConfig.FORMAT_KEY)
+    @GET("search.ashx?"+BuildConfig.FORMAT_KEY)
     fun getSearchResults(@Query("query")query : String,
                          @Query("num_of_results")num_of_results : String
                             ) : Call<SearchResponse>

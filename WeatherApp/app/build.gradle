@@ -18,11 +18,18 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    androidExtensions {
+        experimental = true
+    }
+
+    dataBinding {
+        enabled = true
+    }
     buildTypes {
-        debug{
+        debug {
             debuggable true
             minifyEnabled false
-            buildConfigField('String','FORMAT_KEY','"&format=json&key=e35d1e43b44e4d698da30324202302"')
+            buildConfigField('String', 'FORMAT_KEY', '"&format=json&key=e35d1e43b44e4d698da30324202302"')
         }
         release {
             minifyEnabled false

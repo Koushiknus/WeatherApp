@@ -26,7 +26,7 @@ class WeatherViewModel : BaseViewModel() {
 
     fun testGetWeatherDetails(){
         viewModelScope.launch {
-            val result = mWeatherRepository?.getWeatherDetails() as WeatherDetailsResponse
+            val result = mWeatherRepository?.getWeatherDetails("","","") as WeatherDetailsResponse
             Log.v("WeatherResponse",result.toString())
         }
     }
