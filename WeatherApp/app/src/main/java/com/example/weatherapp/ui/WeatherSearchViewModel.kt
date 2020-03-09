@@ -16,6 +16,7 @@ class WeatherSearchViewModel : BaseViewModel() {
     @set:Inject
     var mWeatherSearchRepository: WeatherSearchRepository? = null
     var mSearchResponse = MutableLiveData<SearchResponse>()
+    var mOnLoadOfScreenFirstTime = true
 
     fun testSearchResults(selectedCountry: String) {
         viewModelScope.launch {

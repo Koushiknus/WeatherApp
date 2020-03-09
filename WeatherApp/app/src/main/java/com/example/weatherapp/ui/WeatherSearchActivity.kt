@@ -37,7 +37,7 @@ class WeatherSearchActivity : AppCompatActivity() {
     }
 
     private fun initialData(){
-        val arraySpinner = arrayOf("Singapore","India") // test data
+        val arraySpinner = arrayOf(Constants.SELECT_LOCATION,"Singapore","India") // test data
         val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
             this,
             R.layout.support_simple_spinner_dropdown_item, arraySpinner
@@ -54,7 +54,9 @@ class WeatherSearchActivity : AppCompatActivity() {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedCountry = parent?.getItemAtPosition(position).toString()
-                mWeatherSearchViewModel.testSearchResults(selectedCountry)
+                if(!selectedCountry.equals(Constants.SELECT_LOCATION)){
+                    mWeatherSearchViewModel.testSearchResults(selectedCountry)
+                }
 
             }
 

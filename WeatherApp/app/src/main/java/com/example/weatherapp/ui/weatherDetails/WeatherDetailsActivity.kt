@@ -13,7 +13,6 @@ import com.example.weatherapp.R
 import com.example.weatherapp.base.Constants
 import com.example.weatherapp.base.ViewModelFactory
 import com.example.weatherapp.databinding.ActivityWeatherDetailsBinding
-import kotlinx.android.synthetic.main.activity_weather_details.*
 
 class WeatherDetailsActivity : AppCompatActivity() {
 
@@ -37,7 +36,7 @@ class WeatherDetailsActivity : AppCompatActivity() {
             val current_condition = it.data.current_condition.get(0)
             val todayWeatherCondition = mWeatherDetailViewModel.mTodayWeatherCondition
             todayWeatherCondition.humidity = getString(R.string.humidity)+ current_condition.humidity.toString()
-            todayWeatherCondition.temparaureStatus =current_condition.temp_C.toString() + " C " + current_condition.temp_F.toString() + " F"
+            todayWeatherCondition.temparatureStatus =current_condition.temp_C.toString() + " C " + current_condition.temp_F.toString() + " F"
 
             todayWeatherCondition.weatherImage = current_condition.weatherIconUrl.get(0).value
             todayWeatherCondition.weatherDescription = current_condition.weatherDesc.get(0).value

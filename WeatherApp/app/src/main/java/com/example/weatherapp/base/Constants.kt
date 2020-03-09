@@ -6,4 +6,5 @@ object Constants {
     val NUMBER_OF_DAYS = "1"
     val DURATION_PERIOD = "1"
     val LATLONG = "latLong"
+    val SELECT_LOCATION = "Select your location"
 }
