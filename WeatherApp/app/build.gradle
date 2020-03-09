@@ -29,6 +29,7 @@ android {
         debug {
             debuggable true
             minifyEnabled false
+            multiDexEnabled true
             buildConfigField('String', 'FORMAT_KEY', '"&format=json&key=e35d1e43b44e4d698da30324202302"')
         }
         release {
@@ -148,6 +149,8 @@ dependencies {
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3'
+
+    implementation 'com.toptoche.searchablespinner:searchablespinnerlibrary:1.3.1'
 
 
 }

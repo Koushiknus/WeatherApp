@@ -5,7 +5,8 @@ import com.example.weatherapp.di.AppModule
 import com.example.weatherapp.di.DaggerViewModelInjector
 import com.example.weatherapp.di.RepositoryModule
 import com.example.weatherapp.di.ViewModelInjector
-import com.example.weatherapp.ui.WeatherViewModel
+import com.example.weatherapp.ui.WeatherSearchViewModel
+import com.example.weatherapp.ui.weatherDetails.WeatherDetailsViewModel
 
 abstract class BaseViewModel : ViewModel() {
 
@@ -21,8 +22,8 @@ abstract class BaseViewModel : ViewModel() {
 
     private fun inject(){
         when (this) {
-           is WeatherViewModel -> injector.inject(this)
-
+           is WeatherSearchViewModel -> injector.inject(this)
+           is WeatherDetailsViewModel -> injector.inject(this)
         }
     }
 }

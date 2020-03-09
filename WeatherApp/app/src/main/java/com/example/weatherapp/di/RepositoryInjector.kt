@@ -1,6 +1,6 @@
 package com.example.weatherapp.di
 
-import com.example.weatherapp.ui.WeatherRepository
+import com.example.weatherapp.ui.WeatherSearchRepository
 import dagger.Component
 import javax.inject.Singleton
 
@@ -8,7 +8,7 @@ import javax.inject.Singleton
 @Component(modules = [(AppModule::class), RepositoryModule::class])
 interface RepositoryInjector {
 
-    fun inject(weatherRepository: WeatherRepository)
+    fun inject(weatherSearchRepository: WeatherSearchRepository)
 
     @Component.Builder
     interface Builder {

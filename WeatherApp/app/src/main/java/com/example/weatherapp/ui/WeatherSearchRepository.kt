@@ -1,6 +1,5 @@
 package com.example.weatherapp.ui
 
-import android.telecom.Call
 import com.example.weatherapp.base.BaseRepository
 import com.example.weatherapp.model.SearchResponse
 import com.example.weatherapp.model.WeatherDetailsResponse
@@ -11,15 +10,15 @@ import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
-class WeatherRepository : BaseRepository() {
+class WeatherSearchRepository : BaseRepository() {
 
     @set: Inject
     var mApiMethods : ApiMethods? = null
 
-    suspend fun getSearchResult() : SearchResponse?{
+    suspend fun getSearchResult(selectedCountry: String): SearchResponse?{
         return suspendCoroutine { continuation ->
               mApiMethods?.let {
-                  mApiMethods?.getSearchResults("London","3")?.enqueue(object : Callback<SearchResponse>{
+                  mApiMethods?.getSearchResults(selectedCountry,"3")?.enqueue(object : Callback<SearchResponse>{
                       override fun onFailure(call: retrofit2.Call<SearchResponse>, t: Throwable) {
                       }
 

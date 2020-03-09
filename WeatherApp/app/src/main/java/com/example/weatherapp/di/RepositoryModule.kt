@@ -1,6 +1,6 @@
 package com.example.weatherapp.di
 
-import com.example.weatherapp.ui.WeatherRepository
+import com.example.weatherapp.ui.WeatherSearchRepository
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -13,7 +13,7 @@ object RepositoryModule {
     @Provides
     @Reusable
     @JvmStatic
-    internal fun provideWeatherRepository() : WeatherRepository{
-        return WeatherRepository()
+    internal fun provideWeatherRepository() : WeatherSearchRepository{
+        return WeatherSearchRepository()
     }
 }

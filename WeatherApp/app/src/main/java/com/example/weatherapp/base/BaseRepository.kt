@@ -4,7 +4,7 @@ import com.example.weatherapp.di.AppModule
 import com.example.weatherapp.di.DaggerRepositoryInjector
 import com.example.weatherapp.di.RepositoryInjector
 import com.example.weatherapp.di.RepositoryModule
-import com.example.weatherapp.ui.WeatherRepository
+import com.example.weatherapp.ui.WeatherSearchRepository
 
 abstract class BaseRepository {
 
@@ -20,7 +20,7 @@ abstract class BaseRepository {
 
     private fun inject(){
         when(this){
-            is WeatherRepository -> injector.inject(this)
+            is WeatherSearchRepository -> injector.inject(this)
         }
     }
 }

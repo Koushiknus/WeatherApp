@@ -5,110 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    >
+
+    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+
+            android:id="@+id/country_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="22dp"
-        android:baselineAligned="false"
-        android:paddingTop="?attr/actionBarSize">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/todayTemperature"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0 °C"
-                android:textSize="36sp"/>
-
-            <TextView
-                android:id="@+id/todayDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="No data"
-                android:textSize="16sp"/>
-
-            <TextView
-                android:id="@+id/todayWind"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Wind: 0 m/s"
-                android:textSize="16sp"/>
-
-            <TextView
-                android:id="@+id/todayPressure"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Pressure: 0 hpa"
-                android:textSize="16sp"/>
-
-            <TextView
-                android:id="@+id/todayHumidity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Humidity: 0 %"
-                android:textSize="16sp"/>
-
-            <TextView
-                android:id="@+id/todaySunrise"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sunrise: 00:00"
-                android:textSize="16sp"/>
-
-            <TextView
-                android:id="@+id/todaySunset"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sunset: 00:00"
-                android:textSize="16sp"/>
-
-            <TextView
-                android:id="@+id/todayUvIndex"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Uv Index: Loading..."
-                android:textSize="16sp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="end"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/todayIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:paddingRight="42dp"
-                android:text=""
-                android:textAlignment="viewEnd"
-                android:textSize="72sp"/>
-
-            <TextView
-                android:id="@+id/lastUpdate"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="bottom|end"
-                android:gravity="bottom|end"
-                android:paddingRight="16dp"
-                android:textAlignment="viewEnd"
-                android:textSize="16sp"/>
-        </LinearLayout>
-
-
-    </LinearLayout>
 
 </LinearLayout>

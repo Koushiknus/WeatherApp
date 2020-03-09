@@ -1,6 +1,7 @@
 package com.example.weatherapp.di
 
-import com.example.weatherapp.ui.WeatherViewModel
+import com.example.weatherapp.ui.WeatherSearchViewModel
+import com.example.weatherapp.ui.weatherDetails.WeatherDetailsViewModel
 import dagger.Component
 import javax.inject.Singleton
 
@@ -8,7 +9,8 @@ import javax.inject.Singleton
 @Component(modules = [(AppModule::class), RepositoryModule::class])
 interface ViewModelInjector {
 
-    fun inject(weatherViewModel: WeatherViewModel)
+    fun inject(weatherSearchViewModel: WeatherSearchViewModel)
+    fun inject(weatherDetailsViewModel: WeatherDetailsViewModel)
 
     @Component.Builder
     interface Builder {
