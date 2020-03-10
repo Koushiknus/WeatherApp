@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.R
 import com.example.weatherapp.base.Constants
 import com.example.weatherapp.base.ViewModelFactory
@@ -20,9 +22,24 @@ import kotlinx.android.synthetic.main.activity_weather.*
 class WeatherSearchActivity : AppCompatActivity() {
 
     private lateinit var mWeatherSearchViewModel: WeatherSearchViewModel
+    private lateinit var mRecentLocationSearchAdapter: RecentLocationSearchAdapter
+
+    var mRecentLocationsList = LinkedHashSet<String>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather)
+        mRecentLocationSearchAdapter = RecentLocationSearchAdapter()
+        recyclerview_recent_search.setHasFixedSize(false)
+        recyclerview_recent_search.layoutManager = LinearLayoutManager(this)
+        recyclerview_recent_search.addItemDecoration(
+            DividerItemDecoration(
+                recyclerview_recent_search.getContext(),
+                DividerItemDecoration.VERTICAL
+            )
+        )
+
+        recyclerview_recent_search.adapter = mRecentLocationSearchAdapter
         // Get the support action bar
         val actionBar = supportActionBar
 
@@ -35,6 +52,7 @@ class WeatherSearchActivity : AppCompatActivity() {
         initialData()
 
     }
+
 
     private fun initialData(){
         val arraySpinner = arrayOf(Constants.SELECT_LOCATION,"Singapore","India") // test data
@@ -55,12 +73,20 @@ class WeatherSearchActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedCountry = parent?.getItemAtPosition(position).toString()
                 if(!selectedCountry.equals(Constants.SELECT_LOCATION)){
+                    mRecentLocationsList.add(selectedCountry)
                     mWeatherSearchViewModel.testSearchResults(selectedCountry)
                 }
 
             }
 
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mRecentLocationSearchAdapter.setData(mRecentLocationsList)
+        recyclerview_recent_search.adapter?.notifyDataSetChanged()
+        Log.v("LinkedHashSetContents",mRecentLocationsList.size.toString())
     }
 
     private fun initialObservers(){

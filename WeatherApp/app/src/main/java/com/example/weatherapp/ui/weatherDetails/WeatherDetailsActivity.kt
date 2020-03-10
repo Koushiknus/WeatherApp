@@ -1,8 +1,8 @@
 package com.example.weatherapp.ui.weatherDetails
 
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -13,6 +13,7 @@ import com.example.weatherapp.R
 import com.example.weatherapp.base.Constants
 import com.example.weatherapp.base.ViewModelFactory
 import com.example.weatherapp.databinding.ActivityWeatherDetailsBinding
+
 
 class WeatherDetailsActivity : AppCompatActivity() {
 
