@@ -1,10 +1,12 @@
 package com.example.weatherapp.ui
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.databinding.RecentSearchAdapterBinding
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.LinkedHashSet
 
 class RecentLocationSearchAdapter() : RecyclerView.Adapter<RecentLocationSearchAdapter.ViewHolder>() {
 
@@ -30,9 +32,11 @@ class RecentLocationSearchAdapter() : RecyclerView.Adapter<RecentLocationSearchA
         holder.bindView(mListOfRecentLocations[position])
     }
 
-    fun setData(data : LinkedHashSet<String>){
+    fun setData(data: LinkedHashSet<String>){
         mListOfRecentLocations.clear()
+       // Collections.reverse(data)
         mListOfRecentLocations.addAll(data)
+        Collections.reverse(mListOfRecentLocations)
         notifyDataSetChanged()
     }
 }

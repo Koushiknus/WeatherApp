@@ -17,6 +17,7 @@ import com.example.weatherapp.base.Constants
 import com.example.weatherapp.base.ViewModelFactory
 import com.example.weatherapp.ui.weatherDetails.WeatherDetailsActivity
 import kotlinx.android.synthetic.main.activity_weather.*
+import kotlin.collections.LinkedHashSet
 
 
 class WeatherSearchActivity : AppCompatActivity() {
@@ -73,6 +74,9 @@ class WeatherSearchActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedCountry = parent?.getItemAtPosition(position).toString()
                 if(!selectedCountry.equals(Constants.SELECT_LOCATION)){
+                    if(mRecentLocationsList.contains(selectedCountry)){
+                        mRecentLocationsList.remove(selectedCountry)
+                    }
                     mRecentLocationsList.add(selectedCountry)
                     mWeatherSearchViewModel.testSearchResults(selectedCountry)
                 }
@@ -86,7 +90,6 @@ class WeatherSearchActivity : AppCompatActivity() {
         super.onResume()
         mRecentLocationSearchAdapter.setData(mRecentLocationsList)
         recyclerview_recent_search.adapter?.notifyDataSetChanged()
-        Log.v("LinkedHashSetContents",mRecentLocationsList.size.toString())
     }
 
     private fun initialObservers(){
