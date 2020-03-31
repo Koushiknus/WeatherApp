@@ -1,5 +1,6 @@
 package com.example.weatherapp.base
 
+import android.app.Application
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -9,13 +10,15 @@ import javax.inject.Singleton
 
 @Suppress("UNCHECKED_CAST")
 @Singleton
-class ViewModelFactory(context: Context) : ViewModelProvider.Factory {
+class ViewModelFactory(context: Application) : ViewModelProvider.Factory {
+
+    private val mContext = context
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(WeatherSearchViewModel::class.java))
-            return WeatherSearchViewModel() as T
+            return WeatherSearchViewModel(mContext) as T
         if (modelClass.isAssignableFrom(WeatherDetailsViewModel::class.java))
-            return WeatherDetailsViewModel() as T
+            return WeatherDetailsViewModel(mContext) as T
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 

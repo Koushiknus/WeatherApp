@@ -1,5 +1,7 @@
 package com.example.weatherapp.base
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import com.example.weatherapp.di.AppModule
 import com.example.weatherapp.di.DaggerViewModelInjector
@@ -8,7 +10,7 @@ import com.example.weatherapp.di.ViewModelInjector
 import com.example.weatherapp.ui.WeatherSearchViewModel
 import com.example.weatherapp.ui.weatherDetails.WeatherDetailsViewModel
 
-abstract class BaseViewModel : ViewModel() {
+abstract class BaseViewModel(application: Application) : AndroidViewModel(application) {
 
    private val injector : ViewModelInjector = DaggerViewModelInjector
         .builder()

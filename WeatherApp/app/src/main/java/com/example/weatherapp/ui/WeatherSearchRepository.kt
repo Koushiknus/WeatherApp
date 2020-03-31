@@ -1,6 +1,10 @@
 package com.example.weatherapp.ui
 
+import android.util.Log
 import com.example.weatherapp.base.BaseRepository
+import com.example.weatherapp.database.RecentLocationDAO
+import com.example.weatherapp.database.RecentLocationDb
+import com.example.weatherapp.model.RecentLocation
 import com.example.weatherapp.model.SearchResponse
 import com.example.weatherapp.model.WeatherDetailsResponse
 import com.example.weatherapp.network.ApiMethods
@@ -57,4 +61,18 @@ class WeatherSearchRepository : BaseRepository() {
 
         }
     }
+
+    suspend fun insertRecentLocations(dao : RecentLocationDAO, recentLocation: RecentLocation){
+        Log.v("InsideInsert","InsideInsert")
+       val test =  dao.insertRecentLocations(recentLocation)
+        Log.v("InsertStatus",test.toString())
+    }
+
+    suspend fun getAllLocation(dao : RecentLocationDAO): List<RecentLocation> {
+        return dao.loadAllRecentLocation()
+    }
+
+    suspend fun deleteAllRecentLocations()
+
+
 }

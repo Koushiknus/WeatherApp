@@ -2,6 +2,7 @@ package com.example.weatherapp.ui.weatherDetails
 
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -13,6 +14,7 @@ import com.example.weatherapp.R
 import com.example.weatherapp.base.Constants
 import com.example.weatherapp.base.ViewModelFactory
 import com.example.weatherapp.databinding.ActivityWeatherDetailsBinding
+import kotlinx.android.synthetic.main.layout_progressbar.*
 
 
 class WeatherDetailsActivity : AppCompatActivity() {
@@ -29,11 +31,13 @@ class WeatherDetailsActivity : AppCompatActivity() {
     }
 
     private fun initialData(){
-        mWeatherDetailViewModel = ViewModelProviders.of(this,ViewModelFactory(this)).get(WeatherDetailsViewModel::class.java)
+        mWeatherDetailViewModel = ViewModelProviders.of(this,ViewModelFactory(application)).get(WeatherDetailsViewModel::class.java)
+        showOrHideProgress(View.VISIBLE)
         mWeatherDetailViewModel.getWeatherDetails(intent.getStringExtra(Constants.LATLONG),Constants.NUMBER_OF_DAYS,Constants.DURATION_PERIOD)
     }
     private fun initialObservers(){
         mWeatherDetailViewModel.mWeatherDetailsResponse.observe(this, Observer {
+            showOrHideProgress(View.GONE)
             val current_condition = it.data.current_condition.get(0)
             val todayWeatherCondition = mWeatherDetailViewModel.mTodayWeatherCondition
             todayWeatherCondition.humidity = getString(R.string.humidity)+ current_condition.humidity.toString()
@@ -57,5 +61,8 @@ class WeatherDetailsActivity : AppCompatActivity() {
             mWeatherDetailBinding.weatherDetails = todayWeatherCondition
 
         })
+    }
+    private fun showOrHideProgress(visibilty : Int){
+        progressBar.visibility = visibilty
     }
 }

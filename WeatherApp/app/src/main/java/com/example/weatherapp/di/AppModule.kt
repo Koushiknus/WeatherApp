@@ -1,20 +1,24 @@
 package com.example.weatherapp.di
 
+import android.app.Application
+import android.content.Context
 import com.example.weatherapp.base.Constants
+import com.example.weatherapp.database.RecentLocationDb
 import com.example.weatherapp.network.ApiMethods
 import com.itkacher.okhttpprofiler.OkHttpProfilerInterceptor
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
+
 @Module
-object AppModule {
+ object AppModule {
 
     @Provides
     @JvmStatic

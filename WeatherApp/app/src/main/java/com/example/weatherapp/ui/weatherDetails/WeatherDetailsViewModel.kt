@@ -1,5 +1,6 @@
 package com.example.weatherapp.ui.weatherDetails
 
+import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.weatherapp.base.BaseViewModel
@@ -10,7 +11,7 @@ import com.example.weatherapp.ui.WeatherSearchRepository
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class WeatherDetailsViewModel : BaseViewModel()  {
+class WeatherDetailsViewModel(application: Application) : BaseViewModel(application)  {
 
     var mWeatherDetailsResponse = MutableLiveData<WeatherDetailsResponse>()
     var mTodayWeatherCondition : TodayWeatherCondition = TodayWeatherCondition()

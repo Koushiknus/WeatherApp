@@ -39,4 +39,8 @@ class RecentLocationSearchAdapter() : RecyclerView.Adapter<RecentLocationSearchA
         Collections.reverse(mListOfRecentLocations)
         notifyDataSetChanged()
     }
+
+    fun getMostRecentData(): ArrayList<String> {
+        return mListOfRecentLocations
+    }
 }

@@ -15,8 +15,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.R
 import com.example.weatherapp.base.Constants
 import com.example.weatherapp.base.ViewModelFactory
+import com.example.weatherapp.model.RecentLocation
 import com.example.weatherapp.ui.weatherDetails.WeatherDetailsActivity
 import kotlinx.android.synthetic.main.activity_weather.*
+import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.collections.LinkedHashSet
 
 
@@ -48,10 +51,16 @@ class WeatherSearchActivity : AppCompatActivity() {
         actionBar?.title = getString(R.string.welcome)
         actionBar?.subtitle = getString(R.string.search_places)
         actionBar?.elevation = 4.0F
-        mWeatherSearchViewModel = ViewModelProviders.of(this,ViewModelFactory(this)).get(WeatherSearchViewModel::class.java)
+        mWeatherSearchViewModel = ViewModelProviders.of(this,ViewModelFactory(application)).get(WeatherSearchViewModel::class.java)
         initialObservers()
+        mWeatherSearchViewModel.getAllRecentLocation()
         initialData()
+        fetchLocalDataFromDb()
 
+    }
+
+    private fun fetchLocalDataFromDb(){
+        mWeatherSearchViewModel.getAllRecentLocation()
     }
 
 
@@ -79,6 +88,7 @@ class WeatherSearchActivity : AppCompatActivity() {
                     }
                     mRecentLocationsList.add(selectedCountry)
                     mWeatherSearchViewModel.testSearchResults(selectedCountry)
+
                 }
 
             }
@@ -90,6 +100,8 @@ class WeatherSearchActivity : AppCompatActivity() {
         super.onResume()
         mRecentLocationSearchAdapter.setData(mRecentLocationsList)
         recyclerview_recent_search.adapter?.notifyDataSetChanged()
+
+       // mWeatherSearchViewModel.getAllRecentLocation()
     }
 
     private fun initialObservers(){
@@ -99,9 +111,33 @@ class WeatherSearchActivity : AppCompatActivity() {
             Intent(this, WeatherDetailsActivity::class.java).apply {
                 putExtra(Constants.LATLONG,latLong)
                 startActivity(this)
+                saveRecentDataToDb()
             }
 
         })
+        mWeatherSearchViewModel.mListOfRecentLocation.observe(this, Observer {
+            Log.v("RecentLocations",it.toString())
+            mRecentLocationsList.clear()
+            mRecentLocationsList.addAll(it.get(1).mRecentLocations)
+            mRecentLocationSearchAdapter.setData(mRecentLocationsList)
+            recyclerview_recent_search.adapter?.notifyDataSetChanged()
+        })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.v("OndestroyInvoked","OndestroyInvoked")
+    }
+
+    private fun saveRecentDataToDb(){
+        val recentData = mRecentLocationSearchAdapter.getMostRecentData()
+        Collections.reverse(recentData)
+        Log.v("RecentData",recentData.toString())
+        var mRecentLocation = RecentLocation(ArrayList<String>())
+        mRecentLocation.mRecentLocations = recentData
+        mWeatherSearchViewModel.insertRecentLocationstoDb(mRecentLocation)
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
