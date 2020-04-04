@@ -87,10 +87,10 @@ class WeatherSearchActivity : AppCompatActivity() {
                         mRecentLocationsList.remove(selectedCountry)
                     }
                     mRecentLocationsList.add(selectedCountry)
+                    mRecentLocationSearchAdapter.setData(mRecentLocationsList)
                     mWeatherSearchViewModel.testSearchResults(selectedCountry)
 
                 }
-
             }
 
         }
@@ -118,7 +118,9 @@ class WeatherSearchActivity : AppCompatActivity() {
         mWeatherSearchViewModel.mListOfRecentLocation.observe(this, Observer {
             Log.v("RecentLocations",it.toString())
             mRecentLocationsList.clear()
-            mRecentLocationsList.addAll(it.get(1).mRecentLocations)
+            if(it.isNotEmpty()){
+                mRecentLocationsList.addAll(it.get(0).mRecentLocations)
+            }
             mRecentLocationSearchAdapter.setData(mRecentLocationsList)
             recyclerview_recent_search.adapter?.notifyDataSetChanged()
         })
@@ -133,9 +135,14 @@ class WeatherSearchActivity : AppCompatActivity() {
         val recentData = mRecentLocationSearchAdapter.getMostRecentData()
         Collections.reverse(recentData)
         Log.v("RecentData",recentData.toString())
-        var mRecentLocation = RecentLocation(ArrayList<String>())
+        var mRecentLocation = RecentLocation(1,ArrayList<String>())
         mRecentLocation.mRecentLocations = recentData
-        mWeatherSearchViewModel.insertRecentLocationstoDb(mRecentLocation)
+        if(mWeatherSearchViewModel.mSaveUserFirstTime){
+            mWeatherSearchViewModel.mSaveUserFirstTime = false
+            mWeatherSearchViewModel.insertRecentLocationstoDb(mRecentLocation)
+        }else{
+            mWeatherSearchViewModel.updateRecentLocationsToDb(mRecentLocation)
+        }
 
 
     }

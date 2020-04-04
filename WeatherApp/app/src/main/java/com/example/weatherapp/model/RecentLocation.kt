@@ -5,5 +5,5 @@ import androidx.room.PrimaryKey
 import java.util.ArrayList
 
 @Entity(tableName = "recent_table")
-data class RecentLocation ( @PrimaryKey
+data class RecentLocation ( @PrimaryKey var id : Int,
                             var mRecentLocations :ArrayList<String>)

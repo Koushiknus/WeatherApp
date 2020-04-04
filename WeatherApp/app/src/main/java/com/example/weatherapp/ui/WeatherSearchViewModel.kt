@@ -24,7 +24,7 @@ class WeatherSearchViewModel(application: Application) : BaseViewModel(applicati
     var mWeatherSearchRepository: WeatherSearchRepository? = null
     var mSearchResponse = MutableLiveData<SearchResponse>()
     var mListOfRecentLocation = MutableLiveData<List<RecentLocation>>()
-    var mOnLoadOfScreenFirstTime = true
+    var mSaveUserFirstTime = true
 
     init {
         mRecentLocationDAO = RecentLocationDb.getDatabase(application).getRecentLocation()
@@ -50,6 +50,12 @@ class WeatherSearchViewModel(application: Application) : BaseViewModel(applicati
             e.printStackTrace()
         }
 
+    }
+
+    fun updateRecentLocationsToDb(recentLocation: RecentLocation){
+        viewModelScope.launch {
+            mRecentLocationDAO?.let { mWeatherSearchRepository?.updateAllRecentLocation(it,recentLocation) }
+        }
     }
 
     fun getAllRecentLocation(){

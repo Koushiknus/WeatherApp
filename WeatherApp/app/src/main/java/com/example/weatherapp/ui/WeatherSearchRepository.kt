@@ -72,7 +72,10 @@ class WeatherSearchRepository : BaseRepository() {
         return dao.loadAllRecentLocation()
     }
 
-    suspend fun deleteAllRecentLocations()
+    suspend fun updateAllRecentLocation(dao : RecentLocationDAO, recentLocation: RecentLocation){
+      val result =   dao.updateRecentLocation(recentLocation)
+        Log.v("UpdateResultIs",result.toString())
+    }
 
 
 }

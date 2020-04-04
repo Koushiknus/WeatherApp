@@ -1,5 +1,4 @@
 package com.example.weatherapp.ui
-
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -34,7 +33,6 @@ class RecentLocationSearchAdapter() : RecyclerView.Adapter<RecentLocationSearchA
 
     fun setData(data: LinkedHashSet<String>){
         mListOfRecentLocations.clear()
-       // Collections.reverse(data)
         mListOfRecentLocations.addAll(data)
         Collections.reverse(mListOfRecentLocations)
         notifyDataSetChanged()
