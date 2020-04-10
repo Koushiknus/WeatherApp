@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.View
 import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -65,35 +66,39 @@ class WeatherSearchActivity : AppCompatActivity() {
 
 
     private fun initialData(){
-        val arraySpinner = arrayOf(Constants.SELECT_LOCATION,"Singapore","India") // test data
         val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
             this,
-            R.layout.support_simple_spinner_dropdown_item, arraySpinner
+            R.layout.support_simple_spinner_dropdown_item, Constants.COUNTRY_ARRAY
         )
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
         country_list.adapter = adapter
         country_list.setTitle(getString(R.string.select_country))
         country_list.setPositiveButton(getString(R.string.ok))
+        country_list.post(Runnable {
+            country_list.setOnItemSelectedListener(object : OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View,
+                    position: Int,
+                    id: Long
+                ) { // Only called when the user changes the selection
 
-        country_list?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {
+                    val selectedCountry = parent?.getItemAtPosition(position).toString()
+                    Log.v("OnItemSelected",selectedCountry)
+                    if(!selectedCountry.equals(Constants.SELECT_LOCATION)){
+                        if(mRecentLocationsList.contains(selectedCountry)){
+                            mRecentLocationsList.remove(selectedCountry)
+                        }
+                        mRecentLocationsList.add(selectedCountry)
+                        mRecentLocationSearchAdapter.setData(mRecentLocationsList)
+                        mWeatherSearchViewModel.searchWeatherByCountry(selectedCountry)
 
-            }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedCountry = parent?.getItemAtPosition(position).toString()
-                if(!selectedCountry.equals(Constants.SELECT_LOCATION)){
-                    if(mRecentLocationsList.contains(selectedCountry)){
-                        mRecentLocationsList.remove(selectedCountry)
                     }
-                    mRecentLocationsList.add(selectedCountry)
-                    mRecentLocationSearchAdapter.setData(mRecentLocationsList)
-                    mWeatherSearchViewModel.testSearchResults(selectedCountry)
-
                 }
-            }
 
-        }
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+            })
+        })
     }
 
     override fun onResume() {

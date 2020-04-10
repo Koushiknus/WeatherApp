@@ -30,26 +30,22 @@ class WeatherSearchViewModel(application: Application) : BaseViewModel(applicati
         mRecentLocationDAO = RecentLocationDb.getDatabase(application).getRecentLocation()
     }
 
-    fun testSearchResults(selectedCountry: String) {
+    fun searchWeatherByCountry(selectedCountry: String) {
         viewModelScope.launch {
            val result = mWeatherSearchRepository?.getSearchResult(selectedCountry) as SearchResponse
             mSearchResponse.postValue(result)
-           Log.v("ResultReceived",result.toString())
         }
 
     }
 
     fun insertRecentLocationstoDb(recentLocation: RecentLocation){
-        Log.v("InsideViewModelInsert","InsideViewModelInsert")
         try{
             viewModelScope.launch {
                 mWeatherSearchRepository?.insertRecentLocations(mRecentLocationDAO!!,recentLocation)
             }
         }catch (e : Exception){
-            Log.v("InsideDbException","InsideDbException")
             e.printStackTrace()
         }
-
     }
 
     fun updateRecentLocationsToDb(recentLocation: RecentLocation){
