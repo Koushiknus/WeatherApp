@@ -37,7 +37,6 @@ class WeatherDetailsActivity : AppCompatActivity() {
     }
     private fun initialObservers(){
         mWeatherDetailViewModel.mWeatherDetailsResponse.observe(this, Observer {
-            showOrHideProgress(View.GONE)
             val current_condition = it.data.current_condition.get(0)
             val todayWeatherCondition = mWeatherDetailViewModel.mTodayWeatherCondition
             todayWeatherCondition.humidity = getString(R.string.humidity)+ current_condition.humidity.toString()
@@ -59,6 +58,7 @@ class WeatherDetailsActivity : AppCompatActivity() {
                 .fitCenter()
                 .into(mWeatherDetailBinding.todayIcon)
             mWeatherDetailBinding.weatherDetails = todayWeatherCondition
+            showOrHideProgress(View.GONE)
 
         })
     }
