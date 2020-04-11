@@ -85,20 +85,24 @@ class WeatherSearchActivity : AppCompatActivity() {
 
                     val selectedCountry = parent?.getItemAtPosition(position).toString()
                     Log.v("OnItemSelected",selectedCountry)
-                    if(!selectedCountry.equals(Constants.SELECT_LOCATION)){
-                        if(mRecentLocationsList.contains(selectedCountry)){
-                            mRecentLocationsList.remove(selectedCountry)
-                        }
-                        mRecentLocationsList.add(selectedCountry)
-                        mRecentLocationSearchAdapter.setData(mRecentLocationsList)
-                        mWeatherSearchViewModel.searchWeatherByCountry(selectedCountry)
-
-                    }
+                    loadSearchAPI(selectedCountry)
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
             })
         })
+    }
+
+    private fun loadSearchAPI(selectedCountry : String){
+        if(!selectedCountry.equals(Constants.SELECT_LOCATION)){
+            if(mRecentLocationsList.contains(selectedCountry)){
+                mRecentLocationsList.remove(selectedCountry)
+            }
+            mRecentLocationsList.add(selectedCountry)
+            mRecentLocationSearchAdapter.setData(mRecentLocationsList)
+            mWeatherSearchViewModel.searchWeatherByCountry(selectedCountry)
+
+        }
     }
 
     override fun onResume() {
@@ -128,6 +132,10 @@ class WeatherSearchActivity : AppCompatActivity() {
             }
             mRecentLocationSearchAdapter.setData(mRecentLocationsList)
             recyclerview_recent_search.adapter?.notifyDataSetChanged()
+        })
+
+        mRecentLocationSearchAdapter.mChoosenLocation.observe(this, Observer {
+            loadSearchAPI(it)
         })
     }
 
