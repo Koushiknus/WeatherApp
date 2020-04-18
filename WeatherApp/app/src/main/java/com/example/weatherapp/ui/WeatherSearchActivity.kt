@@ -98,6 +98,7 @@ class WeatherSearchActivity : AppCompatActivity() {
             if(mRecentLocationsList.contains(selectedCountry)){
                 mRecentLocationsList.remove(selectedCountry)
             }
+            showNoSearchHistory()
             mRecentLocationsList.add(selectedCountry)
             mRecentLocationSearchAdapter.setData(mRecentLocationsList)
             mWeatherSearchViewModel.searchWeatherByCountry(selectedCountry)
@@ -129,6 +130,12 @@ class WeatherSearchActivity : AppCompatActivity() {
             mRecentLocationsList.clear()
             if(it.isNotEmpty()){
                 mRecentLocationsList.addAll(it.get(0).mRecentLocations)
+                lbl_no_recent_search.visibility = View.GONE
+                lbl_recent_search.visibility = View.VISIBLE
+
+            }else{
+                lbl_no_recent_search.visibility = View.VISIBLE
+                lbl_recent_search.visibility = View.GONE
             }
             mRecentLocationSearchAdapter.setData(mRecentLocationsList)
             recyclerview_recent_search.adapter?.notifyDataSetChanged()
@@ -137,6 +144,11 @@ class WeatherSearchActivity : AppCompatActivity() {
         mRecentLocationSearchAdapter.mChoosenLocation.observe(this, Observer {
             loadSearchAPI(it)
         })
+    }
+
+    private fun showNoSearchHistory(){
+        lbl_no_recent_search.visibility = View.GONE
+        lbl_recent_search.visibility = View.VISIBLE
     }
 
     override fun onDestroy() {

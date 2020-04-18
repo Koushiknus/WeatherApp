@@ -25,6 +25,14 @@
         android:text = "@string/your_recent_search_list"
         android:layout_height="wrap_content"
         />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lbl_no_recent_search"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:text="@string/no_search_history"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_recent_search"
