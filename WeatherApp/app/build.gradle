@@ -30,7 +30,7 @@ android {
             debuggable true
             minifyEnabled false
             multiDexEnabled true
-            buildConfigField('String', 'FORMAT_KEY', '"&format=json&key=e35d1e43b44e4d698da30324202302"')
+            buildConfigField('String', 'FORMAT_KEY', '"&format=json&key=35f846509ae3480f8b094938201605"')
         }
         release {
             minifyEnabled false

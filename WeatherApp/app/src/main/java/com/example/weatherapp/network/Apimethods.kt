@@ -14,7 +14,7 @@ interface ApiMethods {
                          @Query("num_of_results")num_of_results : String
                             ) : Call<SearchResponse>
 
-    @GET("weather.ashx?key=e35d1e43b44e4d698da30324202302&format=json")
+    @GET("weather.ashx?"+BuildConfig.FORMAT_KEY)
     fun getWeatherDetails(@Query("q")q : String,
                           @Query("num_of_days")num_of_days : String,
                           @Query("tp")tp : String) : Call<WeatherDetailsResponse>
