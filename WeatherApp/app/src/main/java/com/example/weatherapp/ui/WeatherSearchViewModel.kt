@@ -22,7 +22,7 @@ class WeatherSearchViewModel(application: Application) : BaseViewModel(applicati
 
     @set:Inject
     var mWeatherSearchRepository: WeatherSearchRepository? = null
-    var mSearchResponse = MutableLiveData<SearchResponse>()
+    var mSearchResponse = MutableLiveData<SearchResponse?>()
     var mListOfRecentLocation = MutableLiveData<List<RecentLocation>>()
     var mSaveUserFirstTime = true
 
@@ -32,8 +32,12 @@ class WeatherSearchViewModel(application: Application) : BaseViewModel(applicati
 
     fun searchWeatherByCountry(selectedCountry: String) {
         viewModelScope.launch {
-           val result = mWeatherSearchRepository?.getSearchResult(selectedCountry) as SearchResponse
-            mSearchResponse.postValue(result)
+           val result = mWeatherSearchRepository?.getSearchResult(selectedCountry)
+            if(result!=null){
+                mSearchResponse.postValue(result)
+            }else{
+                mSearchResponse.postValue(null)
+            }
         }
 
     }

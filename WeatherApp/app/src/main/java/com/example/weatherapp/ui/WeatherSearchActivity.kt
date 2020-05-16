@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.R
+import com.example.weatherapp.base.BaseActivity
 import com.example.weatherapp.base.Constants
 import com.example.weatherapp.base.ViewModelFactory
 import com.example.weatherapp.model.RecentLocation
@@ -24,7 +25,7 @@ import kotlin.collections.ArrayList
 import kotlin.collections.LinkedHashSet
 
 
-class WeatherSearchActivity : AppCompatActivity() {
+class WeatherSearchActivity : BaseActivity() {
 
     private lateinit var mWeatherSearchViewModel: WeatherSearchViewModel
     private lateinit var mRecentLocationSearchAdapter: RecentLocationSearchAdapter
@@ -116,14 +117,22 @@ class WeatherSearchActivity : AppCompatActivity() {
 
     private fun initialObservers(){
         mWeatherSearchViewModel.mSearchResponse.observe(this, Observer {
-            Log.v("Lat Long Received",it.search_api.result.get(0).latitude.toString()+","+it.search_api.result.get(0).longitude.toString())
-            val latLong = it.search_api.result.get(0).latitude.toString()+","+it.search_api.result.get(0).longitude.toString()
-            Intent(this, WeatherDetailsActivity::class.java).apply {
-                putExtra(Constants.LATLONG,latLong)
-                startActivity(this)
-                saveRecentDataToDb()
+            Log.v("Lat Long Received",it?.search_api?.result?.get(0)?.latitude.toString()+","+it?.search_api?.result?.get(0)?.longitude.toString())
+            val searchResponse = it?.search_api?.result?.get(0)
+            val latitude = searchResponse?.latitude
+            val longitude = searchResponse?.longitude
+            if(latitude!=null && longitude!=null){
+                val latLong = it?.search_api?.result?.get(0)?.latitude.toString()+","+it?.search_api?.result?.get(0)?.longitude.toString()
+                latLong.let {
+                    Intent(this, WeatherDetailsActivity::class.java).apply {
+                        putExtra(Constants.LATLONG,it)
+                        startActivity(this)
+                        saveRecentDataToDb()
+                    }
+                }
+            }else{
+                showErrorDialog()
             }
-
         })
         mWeatherSearchViewModel.mListOfRecentLocation.observe(this, Observer {
             Log.v("RecentLocations",it.toString())

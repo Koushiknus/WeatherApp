@@ -30,8 +30,13 @@ class WeatherSearchRepository : BaseRepository() {
                           call: retrofit2.Call<SearchResponse>,
                           response: Response<SearchResponse>
                       ) {
-                          val response = response.body() as SearchResponse
-                          continuation.resume(response)
+                          try{
+                              val response = response.body() as SearchResponse
+                              continuation.resume(response)
+                          }catch (e: Exception){
+                              continuation.resume(null)
+                          }
+
                       }
                   })
             }

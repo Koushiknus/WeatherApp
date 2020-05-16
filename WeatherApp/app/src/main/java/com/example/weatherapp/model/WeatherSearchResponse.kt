@@ -1,12 +1,22 @@
 package com.example.weatherapp.model
 
 data class SearchResponse (
-    val search_api : SearchApi
+    val search_api : SearchApi,
+    val data : DataError
+
 )
 
 data class SearchApi (
     val result : List<Result>
 )
+data class DataError (
+    val error : List<Error>
+)
+
+data class Error (
+    val msg : String
+)
+
 
 data class Result (
     val areaName : List<AreaName>,
