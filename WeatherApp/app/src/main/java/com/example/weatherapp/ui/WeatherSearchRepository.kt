@@ -58,8 +58,14 @@ class WeatherSearchRepository : BaseRepository() {
                         call: retrofit2.Call<WeatherDetailsResponse>,
                         response: Response<WeatherDetailsResponse>
                     ) {
-                        val response = response.body() as WeatherDetailsResponse
-                        continuation.resume(response)
+                        try{
+                            val response = response.body() as WeatherDetailsResponse
+                            continuation.resume(response)
+                        }catch (e: Exception){
+                            e.printStackTrace()
+                            continuation.resume(null)
+                        }
+
                     }
                 })
             }

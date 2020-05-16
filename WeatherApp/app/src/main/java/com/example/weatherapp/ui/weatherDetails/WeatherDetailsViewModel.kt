@@ -24,8 +24,14 @@ class WeatherDetailsViewModel(application: Application) : BaseViewModel(applicat
 
     fun getWeatherDetails(latLong : String,numberOfDays : String,tp : String){
         viewModelScope.launch {
-            val result = mWeatherSearchRepository?.getWeatherDetails(latLong,numberOfDays,tp) as WeatherDetailsResponse
-            mWeatherDetailsResponse.postValue(result)
+            val result = mWeatherSearchRepository?.getWeatherDetails(latLong,numberOfDays,tp)
+
+            result?.let {
+                mWeatherDetailsResponse.postValue(it)
+            } ?: kotlin.run {
+                mWeatherDetailsResponse.postValue(null)
+            }
+
         }
     }
 
