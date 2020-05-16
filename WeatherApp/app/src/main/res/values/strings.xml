@@ -10,7 +10,7 @@
     <string name="ok">Ok</string>
     <string name="your_recent_search_list">Your Recent Search List ....</string>
     <string name="no_search_history">No Search History</string>
-    <string name="error_message">An Error as occurred please try again later</string>
+    <string name="error_message">An error as occurred please try again later</string>
     <string name="error">Error</string>
     <string name="cancel">Cancel</string>
 </resources>
